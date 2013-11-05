@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bash bin/package
+cp target/helloworld-$(mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | grep -v '\[')-jar-with-dependencies.jar /tmp/helloworld.jar
+java -cp /tmp/helloworld.jar is.ru.helloworld.HelloWorld
