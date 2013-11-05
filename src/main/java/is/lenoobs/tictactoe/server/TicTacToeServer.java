@@ -1,4 +1,4 @@
-package is.lenoobs.tictactoe;
+package is.lenoobs.tictactoe.server;
 
 public class TicTacToeServer {
     public static String run() {
