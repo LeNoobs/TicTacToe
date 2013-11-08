@@ -1,8 +1,5 @@
 package is.lenoobs.tictactoe.game;
 
-import static org.junit.Assert.assertEquals;
-
-import is.lenoobs.tictactoe.game.Cell;
 import org.junit.Test;
 
 public class CellTest {
