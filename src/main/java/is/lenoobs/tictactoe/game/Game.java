@@ -1,4 +1,5 @@
 package is.lenoobs.tictactoe.game;
 
-public class TicTacToeGame {
+public interface Game {
+
 }

@@ -1,4 +1,4 @@
-package is.lenoobs.tictactoe;
+package is.lenoobs.tictactoe.server;
 
 import static org.junit.Assert.assertEquals;
 
