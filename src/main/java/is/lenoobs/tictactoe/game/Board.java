@@ -61,7 +61,7 @@ public class Board {
     
         int[][] win_rows = { {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
         
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < 8;) {
         	if(board[win_rows[i][0]] == 'X' && board[win_rows[i][1]] == 'X' && board[win_rows[i][2]] == 'X')
         		return "Player Wins!";
         	else if(board[win_rows[i][0]] == 'O' && board[win_rows[i][1]] == 'O' && board[win_rows[i][2]] == 'O')

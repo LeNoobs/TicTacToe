@@ -6,7 +6,6 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import static spark.Spark.get;
-import static spark.Spark.post;
 
 public class Server {
 
@@ -29,21 +28,19 @@ public class Server {
             		}
             	}
         		return template(game.toHTML());
-        		
             }
         });
 
-        post(new Route("/") {
-            @Override
-            public Object handle(Request request, Response response) {
-                // Skoða köku, finna leik og skrá move.
-                return null;
-            }
+        get(new Route("/move/:cell") {
+        	@Override
+        	public Object handle(Request request, Response response) {
+        		return null;
+        	}
         });
     }
 
     private static String template(String html) {
-    	return "<doctype html><html><head><script src='/tictactoe.js'></script><style>span { margin-left: 40px; font-size: 50px;}</style><title>TicTactoe</title></head><body>" + html +
+    	return "<!doctype html><html><head><style>span { margin-left: 40px; font-size: 50px;}</style><title>TicTactoe</title></head><body>" + html +
     			"</body></html>";
     }
 }
