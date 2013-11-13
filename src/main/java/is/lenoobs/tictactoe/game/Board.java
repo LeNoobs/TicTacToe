@@ -1,26 +1,37 @@
 package is.lenoobs.tictactoe.game;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Board {
-    private char[][] board;
+    private Character[] board;
 
     public Board() {
-        board = new char[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                board[i][j] = '_';
-            }
+        board = new Character[9];
+        for (int i = 0; i < 9; i++) {
+        	board[i] = '_';
         }
     }
 
     @Override
     public String toString() {
         String boardString = "";
-        for (char[] row : board) {
-            for (char cell : row) {
-                boardString += cell;
-            }
-            boardString += "\n";
+        for (int i = 0; i < 9; i++) {
+        	boardString += board[i];
+        	if ((i+1) % 3 == 0) boardString += "\n";
         }
         return boardString;
     }
+
+//	public void randomMove() {
+//		ArrayList<Integer> emptyCells = new ArrayList<>();
+//		
+//		for (Character cell : board) {
+//			if (cell == '_') emptyCells.add(cell);
+//		}
+//		
+//		Random rand = new Random();
+//		int randCell = rand.nextInt(emptyCells.size());
+//		emptyCells.get(randCell)
+//	}
 }
