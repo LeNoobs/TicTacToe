@@ -6,19 +6,19 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MemoryGameRepository implements GameRepository {
-    private ConcurrentHashMap<UUID, Game> games;
+    private ConcurrentHashMap<String, Game> games;
 
     public MemoryGameRepository() {
-        games = new ConcurrentHashMap<UUID, Game>();
+        games = new ConcurrentHashMap<String, Game>();
     }
 
-    public UUID putGame(Game game) {
-        UUID uuid = UUID.randomUUID();
+    public String putGame(Game game) {
+        String uuid = UUID.randomUUID().toString();
         games.put(uuid, game);
-        return uuid;
+        return uuid.toString();
     }
 
-    public Game getGame(UUID uuid) {
+    public Game getGame(String uuid) {
         return games.get(uuid);
     }
 }

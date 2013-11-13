@@ -21,6 +21,10 @@ public class Game {
 		return board.freeCells();
 	}
 	
+	public String toHTML() {
+		return board.toHTML();
+	}
+	
 	@Override
 	public String toString() {
 		return board.toString();

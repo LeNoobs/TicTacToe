@@ -23,6 +23,15 @@ public class Board {
         return boardString;
     }
     
+    public String toHTML() {
+    	String html = "";
+    	for (int i = 0; i < 9; i++) {
+    		html += "<span class='cell' id='" + i + "'>" + board[i] + "</span>";
+    		if ((i+1) % 3 == 0) html += "<br/>";
+    	}
+    	return html;
+    }
+    
 	private void randomMove() {
 		ArrayList<Integer> freeCells = freeCells();
 		
