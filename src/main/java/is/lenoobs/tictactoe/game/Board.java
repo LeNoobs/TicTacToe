@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
-    private Character[] board;
+    private char[] board;
 
     public Board() {
-        board = new Character[9];
+        board = new char[9];
         for (int i = 0; i < 9; i++) {
         	board[i] = '_';
         }
@@ -22,16 +22,37 @@ public class Board {
         }
         return boardString;
     }
+    
+	private void randomMove() {
+		ArrayList<Integer> freeCells = freeCells();
+		
+		int rand = (new Random()).nextInt(freeCells.size());
+		int randCellIndex = freeCells.get(rand);
+		move(randCellIndex, 'O');
+	}
+	
+	private void move(int cellIndex, char value) {
+		if (cellIndex < 0 || cellIndex > 8) throw new IllegalArgumentException("cell index out of range");
+		if (board[cellIndex] != '_') throw new IllegalArgumentException("cell not empty");
+		
+		board[cellIndex] = value;
+	}
+	
+	public void computerMove() {
+		randomMove();
+	}
 
-//	public void randomMove() {
-//		ArrayList<Integer> emptyCells = new ArrayList<>();
-//		
-//		for (Character cell : board) {
-//			if (cell == '_') emptyCells.add(cell);
-//		}
-//		
-//		Random rand = new Random();
-//		int randCell = rand.nextInt(emptyCells.size());
-//		emptyCells.get(randCell)
-//	}
+	public void playerMove(int cellIndex) {
+		move(cellIndex, 'X');
+	}
+
+	public ArrayList<Integer> freeCells() {
+		ArrayList<Integer> freeCells = new ArrayList<Integer>();
+		
+		for (int i = 0; i < 9; i++) {
+			if (board[i] == '_') freeCells.add(i);
+		}
+		
+		return freeCells;
+	}
 }
