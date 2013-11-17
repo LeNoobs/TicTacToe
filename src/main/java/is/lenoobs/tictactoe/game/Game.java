@@ -16,6 +16,18 @@ public class Game {
 	public void playerMove(int cellIndex) {
 		board.playerMove(cellIndex);
 	}
+
+    public String win() {
+        return board.win();
+    }
+
+    public boolean done() {
+        return board.done();
+    }
+
+    public String results() {
+        return board.results();
+    }
 	
 	public ArrayList<Integer> freeCells() {
 		return board.freeCells();

@@ -26,7 +26,7 @@ public class Board {
     public String toHTML() {
     	String html = "";
     	for (int i = 0; i < 9; i++) {
-    		html += "<span class='cell' id='" + i + "'>" + board[i] + "</span>";
+    		html += "<a href='/move/" + i + "'>" + board[i] + "</a>";
     		if ((i+1) % 3 == 0) html += "<br/>";
     	}
     	return html;
@@ -71,18 +71,30 @@ public class Board {
         return null;
     }
 
+    public boolean done() {
+        return win() != null | !toString().contains("_");
+    }
+
+    public String results() {
+        String html = "<span>" + win() + "</span><br/><br/>";
+        for (int i = 0; i < 9; i++) {
+            html += "<span>" + board[i] + "</span>";
+            if ((i+1) % 3 == 0) html += "<br/>";
+        }
+        return html;
+    }
+
 	public void playerMove(int cellIndex) {
 		move(cellIndex, 'X');
 	}
 
 	public ArrayList<Integer> freeCells() {
-		ArrayList<Integer> freeCells = new ArrayList<Integer>();
-		
+		ArrayList<Integer> freeCells = new ArrayList<>();
+
 		for (int i = 0; i < 9; i++) {
 			if (board[i] == '_') freeCells.add(i);
 		}
-		
+
 		return freeCells;
 	}
-
 }
