@@ -15,7 +15,7 @@ public class MemoryGameRepository implements GameRepository {
     public String putGame(Game game) {
         String uuid = UUID.randomUUID().toString();
         games.put(uuid, game);
-        return uuid.toString();
+        return uuid;
     }
 
     public Game getGame(String uuid) {
