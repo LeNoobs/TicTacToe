@@ -20,6 +20,18 @@ public class BoardTest {
     	b.board[2] = 'X';
     	String w = b.win();
     	assertEquals(null, w);
+
+        b = new Board();
+        b.board[0] = 'X';
+        b.board[1] = 'O';
+        b.board[2] = 'O';
+        b.board[3] = 'O';
+        b.board[4] = 'X';
+        b.board[5] = 'X';
+        b.board[6] = 'O';
+        b.board[7] = 'X';
+        b.board[8] = 'X';
+        assertEquals(null, b.win());
     }
 
     @Test()
