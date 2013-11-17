@@ -1,6 +1,6 @@
 package is.lenoobs.tictactoe.server;
 
-import is.lenoobs.tictactoe.game.Game;
+import is.lenoobs.tictactoe.game.WebGame;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -9,37 +9,37 @@ import static spark.Spark.get;
 
 public class Server {
 
-    private static GameRepository gameRepo = new MemoryGameRepository();
+    private static MemoryGameRepository<WebGame> gameRepo = new MemoryGameRepository<>();
     
     public static void main(String[] args) {
         get(new Route("/") {
             @Override
             public Object handle(Request request, Response response) {
-            	Game game = gameRepo.getGame(request.cookie("game"));
+            	WebGame game = gameRepo.getGame(request.cookie("game"));
 
-                if (game == null || game.done()) {
-                    game = new Game();
+                if (game == null || game.isDone()) {
+                    game = new WebGame();
                     String id = gameRepo.putGame(game);
                     response.cookie("game", id);
                 }
 
-                return template(game.toHTML());
+                return template(game.render());
             }
         });
 
         get(new Route("/move/:cell") {
         	@Override
         	public Object handle(Request request, Response response) {
-                Game game = gameRepo.getGame(request.cookie("game"));
+                WebGame game = gameRepo.getGame(request.cookie("game"));
 
-                if (game != null && !game.done()) {
+                if (game != null && !game.isDone()) {
                     try {
                         int cell = Integer.parseInt(request.params(":cell"));
                         game.playerMove(cell);
-                        if (!game.done()) game.computerMove();
-                        if (game.done() || game.win() != null) {
+                        if (!game.isDone()) game.computerMove();
+                        if (game.isDone()) {
                             response.removeCookie("game");
-                            return template(game.results());
+                            return template("<span>" + game.winner() + "</span><br/>" + game.render());
                         }
                     } catch (NumberFormatException e) {
                         return "Woops";

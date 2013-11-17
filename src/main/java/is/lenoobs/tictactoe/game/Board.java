@@ -22,76 +22,39 @@ public class Board {
         }
         return boardString;
     }
-    
-    public String toHTML() {
-    	String html = "";
-    	for (int i = 0; i < 9; i++) {
-    		html += "<a href='/move/" + i + "'>" + board[i] + "</a>";
-    		if ((i+1) % 3 == 0) html += "<br/>";
-    	}
-    	return html;
+
+    public char get(int index) {
+        return board[index];
     }
-    
-	private void randomMove() {
-		ArrayList<Integer> freeCells = freeCells();
+
+	public void randomPlace(char value) {
+		ArrayList<Integer> freeCells = emptyCells();
 		
 		int rand = (new Random()).nextInt(freeCells.size());
 		int randCellIndex = freeCells.get(rand);
-		move(randCellIndex, 'O');
+		place(randCellIndex, value);
 	}
 	
-	private void move(int cellIndex, char value) {
+	public void place(int cellIndex, char value) {
 		if (cellIndex < 0 || cellIndex > 8) throw new IllegalArgumentException("cell index out of range");
 		if (board[cellIndex] != '_') throw new IllegalArgumentException("cell not empty");
 		
 		board[cellIndex] = value;
 	}
-	
-	public void computerMove() {
-		randomMove();
-	}
 
-    public String win() {
-        int emptyCells = 0;
-        for (int i = 0; i < 9; i++) {
-            if(board[i] == '_')
-                emptyCells++;
-        }
-
-        if (emptyCells > 4) return null;
-    
-        int[][] win_rows = { {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
-
-        for (int[] winning : win_rows) {
-        	if(board[winning[0]] == 'X' && board[winning[1]] == 'X' && board[winning[2]] == 'X')
-        		return "Player Wins!";
-        	else if(board[winning[0]] == 'O' && board[winning[1]] == 'O' && board[winning[2]] == 'O')
-        		return "Computer Wins!" ;
-        }
-
-        if (emptyCells == 0) return "It's a tie!";
-
-        return null;
+    public boolean isFull() {
+        return !toString().contains("_");
     }
 
-    public boolean done() {
-        return win() != null | !toString().contains("_");
-    }
-
-    public String results() {
-        String html = "<span>" + win() + "</span><br/><br/>";
-        for (int i = 0; i < 9; i++) {
-            html += "<span>" + board[i] + "</span>";
-            if ((i+1) % 3 == 0) html += "<br/>";
+    public int emptyCount() {
+        int count = 0;
+        for (char c : board) {
+            if (c == '_') count++;
         }
-        return html;
+        return count;
     }
 
-	public void playerMove(int cellIndex) {
-		move(cellIndex, 'X');
-	}
-
-	public ArrayList<Integer> freeCells() {
+	private ArrayList<Integer> emptyCells() {
 		ArrayList<Integer> freeCells = new ArrayList<>();
 
 		for (int i = 0; i < 9; i++) {
