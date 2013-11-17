@@ -57,6 +57,7 @@ public class Server {
     	return "<!doctype html><html><head><style>" +
                 "a,span { font-family: monospace; margin-left: 40px; font-size: 50px; text-decoration:none;}" +
                 "a:visited { color: blue;}" +
+                "body { margin-top: 40px; }" +
                 "</style><title>TicTactoe</title></head><body>" +
                 mainContent +
     			"</body></html>";
