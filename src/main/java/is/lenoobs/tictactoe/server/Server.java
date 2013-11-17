@@ -17,10 +17,15 @@ public class Server {
             public Object handle(Request request, Response response) {
             	WebGame game = gameRepo.getGame(request.cookie("game"));
 
-                if (game == null || game.isDone()) {
+                if (game == null) {
                     game = new WebGame();
                     String id = gameRepo.putGame(game);
                     response.cookie("game", id);
+                }
+
+                if (game.isDone()) {
+                    response.removeCookie("game");
+                    return template("<span>" + game.winner() + "</span><br/><br/>" + game.render());
                 }
 
                 return template(game.render());
@@ -37,12 +42,8 @@ public class Server {
                         int cell = Integer.parseInt(request.params(":cell"));
                         game.playerMove(cell);
                         if (!game.isDone()) game.computerMove();
-                        if (game.isDone()) {
-                            response.removeCookie("game");
-                            return template("<span>" + game.winner() + "</span><br/>" + game.render());
-                        }
                     } catch (NumberFormatException e) {
-                        return "Woops";
+                        return "An error occurred";
                     }
                 }
 
