@@ -36,11 +36,10 @@ public class Server {
                     try {
                         int cell = Integer.parseInt(request.params(":cell"));
                         game.playerMove(cell);
+                        if (!game.done()) game.computerMove();
                         if (game.done() || game.win() != null) {
                             response.removeCookie("game");
                             return template(game.results());
-                        } else {
-                            game.computerMove();
                         }
                     } catch (NumberFormatException e) {
                         return "Woops";
