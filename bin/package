@@ -1,4 +1,0 @@
-#!/bin/bash
-
-bash bin/clean
-mvn package
