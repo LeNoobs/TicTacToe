@@ -2,4 +2,5 @@
 
 mvn clean
 mvn compile
-mvn exec:java
+export PORT='1337'
+mvn -e exec:java
