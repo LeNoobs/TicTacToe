@@ -1,17 +1,17 @@
 package is.lenoobs.tictactoe.server;
 
 import is.lenoobs.tictactoe.game.WebGame;
-import spark.Request;
-import spark.Response;
-import spark.Route;
+import spark.*;
 
-import static spark.Spark.get;
+import static spark.Spark.*;
 
 public class Server {
 
     private static MemoryGameRepository<WebGame> gameRepo = new MemoryGameRepository<>();
     
     public static void main(String[] args) {
+    	setPort(Integer.parseInt(System.getenv("PORT")));
+    	
         get(new Route("/") {
             @Override
             public Object handle(Request request, Response response) {
