@@ -38,7 +38,7 @@ public class ServerTestIT {
 	public void setUp() throws Exception {
 		driver = new FirefoxDriver();
 		baseUrl = System.getenv("TEST_URL");
-	    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	    driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 	}
 	
 	@Test
@@ -80,7 +80,6 @@ public class ServerTestIT {
         boolean ends = false;
 
         while (!ends){
-        	System.out.println("wat!");
             WebElement el = driver.findElement(By.linkText("_"));
             el.click();
             try {
