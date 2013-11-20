@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +38,6 @@ public class ServerTestIT {
 	public void setUp() throws Exception {
 		driver = new FirefoxDriver();
 		baseUrl = System.getenv("TEST_URL");
-        if (baseUrl == null) baseUrl = "http://0.0.0.0:1337/";
 	    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 	
@@ -58,6 +58,41 @@ public class ServerTestIT {
 		assertTrue(driver.getPageSource().contains(">X<"));
 		assertTrue(driver.getPageSource().contains(">O<"));
 	}
+
+	@Test
+	public void playerPicksUsedCell() throws Exception {
+		driver.manage().deleteAllCookies();
+		driver.get(baseUrl);		
+		String expected = "Illegal Operation";
+		WebElement el = driver.findElement(By.cssSelector("[href='/move/1']"));
+		el.click();
+		WebElement el2 = driver.findElement(By.cssSelector("[href='/move/1']"));
+		el2.click();
+		String actual = driver.getPageSource();			
+		assertTrue(actual.contains(expected));
+	}
+
+    @Test
+    public void gamePlaysToTheEnd() throws Exception {
+        driver.manage().deleteAllCookies();
+        driver.get(baseUrl);
+
+        boolean ends = false;
+
+        while (!ends){
+        	System.out.println("wat!");
+            WebElement el = driver.findElement(By.linkText("_"));
+            el.click();
+            try {
+            	WebElement gameOver = driver.findElement(By.className("game_over"));
+            	ends = true;
+            }
+            catch (NoSuchElementException e) {
+            	// nothing to be done
+            }
+        }
+        assertTrue(ends);
+    }
 	
 	@After
 	public void tearDown() throws Exception {
