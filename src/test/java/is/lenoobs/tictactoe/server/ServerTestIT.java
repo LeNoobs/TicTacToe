@@ -40,6 +40,18 @@ public class ServerTestIT {
 		assertTrue(driver.getPageSource().contains(">X<"));
 		assertTrue(driver.getPageSource().contains(">O<"));
 	}
+
+	@Test
+	public void playerPicksUsedCell() throws Exception {
+		driver.manage().deleteAllCookies();
+		driver.get(baseUrl);
+		WebElement el = driver.findElement(By.cssSelector("[href='/move/1']"));
+		el.click();
+		el.click();
+		String actual = driver.getPageSource();
+		String expected = "<span class='error'>Illegal Operation</span><br/><br/>";
+		assertTrue(actual.contains(expected));
+	}
 	
 	@After
 	public void tearDown() throws Exception {

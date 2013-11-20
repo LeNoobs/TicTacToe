@@ -28,7 +28,7 @@ public class Server {
 
                 if (game.isDone()) {
                     response.removeCookie("game");
-                    return template("<span>" + game.winner() + "</span><br/><br/>" + game.render());
+                    return template("<span class='game_over'>" + game.winner() + "</span><br/><br/>" + game.render());
                 }
 
                 return template(game.render());
@@ -47,12 +47,15 @@ public class Server {
                         if (!game.isDone()) game.computerMove();
                     } catch (NumberFormatException e) {
                         return "An error occurred";
+                    } catch (IllegalArgumentException err) {               
+                        return template("<span class='error'>Illegal Operation</span><br/><br/>" + game.render());
                     }
                 }
-
-        		response.redirect("/");
-                return null;
-        	}
+                    
+        		    response.redirect("/");
+                    return null;
+            }
+        	   
         });
     }
 
