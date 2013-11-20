@@ -1,9 +1,12 @@
 package is.lenoobs.tictactoe.server;
 
 import is.lenoobs.tictactoe.game.WebGame;
-import spark.*;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.setPort;
 
 public class Server {
 
