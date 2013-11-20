@@ -3,4 +3,5 @@
 mvn clean
 mvn compile
 export PORT='1337'
-mvn -e exec:java
+export TEST_URL='http://0.0.0.0:1337/'
+mvn exec:java

@@ -1,1 +1,1 @@
-web:	java -cp target/classes:target/dependency/* is.lenoobs.tictactoe.server.Server
+web:    java -cp target/tictactoe-jar-with-dependencies.jar is.lenoobs.tictactoe.server.Server

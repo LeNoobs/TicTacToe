@@ -1,0 +1,14 @@
+#!/bin/bash
+
+mvn clean
+mvn package
+
+export PORT='1337'
+export TEST_URL='http://0.0.0.0:1337/'
+
+java -cp target/tictactoe-jar-with-dependencies.jar is.lenoobs.tictactoe.server.Server &
+
+mvn test
+mvn failsafe:integration-test
+
+kill $!
