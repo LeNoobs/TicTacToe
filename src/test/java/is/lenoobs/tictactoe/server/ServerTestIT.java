@@ -44,12 +44,13 @@ public class ServerTestIT {
 	@Test
 	public void playerPicksUsedCell() throws Exception {
 		driver.manage().deleteAllCookies();
-		driver.get(baseUrl);
+		driver.get(baseUrl);		
+		String expected = "Illegal Operation";
 		WebElement el = driver.findElement(By.cssSelector("[href='/move/1']"));
 		el.click();
-		el.click();
-		String actual = driver.getPageSource();
-		String expected = "<span class='error'>Illegal Operation</span><br/><br/>";
+		WebElement el2 = driver.findElement(By.cssSelector("[href='/move/1']"));
+		el2.click();
+		String actual = driver.getPageSource();			
 		assertTrue(actual.contains(expected));
 	}
 	
