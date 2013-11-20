@@ -2,6 +2,7 @@ package is.lenoobs.tictactoe.server;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,12 +16,29 @@ import static org.junit.Assert.assertTrue;
 public class ServerTestIT {
 	private WebDriver driver;
 	private String baseUrl;
-	
+
+    @BeforeClass
+    public static void setUpClass() {
+        try {
+            (new Thread() {
+                public void run() {
+                    String[] port = {"1337"};
+                    Server.main(port);
+                }
+            }).start();
+            Thread.sleep(3000);
+        } catch (InterruptedException interrupt) {
+            System.out.println("ServerTestIT.java: could not start web server");
+            System.exit(1);
+        }
+    }
+
 	@Before
 	public void setUp() throws Exception {
 		driver = new FirefoxDriver();
 		baseUrl = System.getenv("TEST_URL");
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        if (baseUrl == null) baseUrl = "http://0.0.0.0:1337/";
+	    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 	
 	@Test
