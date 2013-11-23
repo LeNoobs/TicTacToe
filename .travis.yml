@@ -21,11 +21,4 @@ deploy:
 
 notifications:
   email:
-    - bjarnia12@ru.is
-    - egillh12@ru.is
-    - gunnars09@ru.is
-    - hildura12@ru.is
-    - johanng12@ru.is
-    - stefanl12@ru.is
-    - tomass12@ru.is
-    - thorr12@ru.is
+    on_success: always
