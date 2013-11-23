@@ -1,10 +1,15 @@
 language: java
 jdk:
-  - oraclejdk7
-
+- oraclejdk7
 before_script:
-  - "export DISPLAY=:99.0"         # "Display" port
-  - "sh -e /etc/init.d/xvfb start" # Launch a "display" to run Selenium tests
-  - sleep 3                        # Give the "display" some time to start
-
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
 script: ./bin/testsuite
+deploy:
+  provider: heroku
+  api_key:
+    secure: EtAWK1uqmdjlFK4zTPOtXD89SpVRefg/WifuWC34RaMXl/QI7yJPl59AQAvmzePls/ysFpUgeaPgWEVDXRHMinhJOHfBHWlLIOdrlLoqrT9wPiT7msVjZFOiFBG3jVrH+KZhHmaG9qvMFwHUEaHfqpAdRC4EVdDgVMKygy2IzqU=
+  app: obscure-tor-9562
+  on:
+    repo: LeNoobs/TicTacToe
