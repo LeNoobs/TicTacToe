@@ -11,4 +11,6 @@ if [ $? -ne 0 ]; then
 fi
 
 mvn -q site
-echo "Reports available under target/site/project-reports.html"
+echo "Reports available:"
+echo "  Style: target/site/checkstyle.html"
+echo "  Coverage: target/site/jacoco/index.html"
