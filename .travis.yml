@@ -12,4 +12,6 @@ deploy:
     secure: EtAWK1uqmdjlFK4zTPOtXD89SpVRefg/WifuWC34RaMXl/QI7yJPl59AQAvmzePls/ysFpUgeaPgWEVDXRHMinhJOHfBHWlLIOdrlLoqrT9wPiT7msVjZFOiFBG3jVrH+KZhHmaG9qvMFwHUEaHfqpAdRC4EVdDgVMKygy2IzqU=
   app: obscure-tor-9562
   on:
+    branch: production
     repo: LeNoobs/TicTacToe
+
