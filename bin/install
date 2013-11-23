@@ -1,0 +1,9 @@
+mvn -q package
+
+if [ $? -ne 0 ]; then
+    echo "install: build failed"
+    exit 1
+fi
+
+cp target/tictactoe-jar-with-dependencies.jar $1
+mvn clean
