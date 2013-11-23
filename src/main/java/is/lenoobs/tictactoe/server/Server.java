@@ -14,7 +14,7 @@ public class Server {
     private static MemoryGameRepository<WebGame> gameRepo = new MemoryGameRepository<>();
     
     public static void main(String[] args) {
-        if (args != null) {
+        if (args.length > 0) {
             setPort(Integer.parseInt(args[0]));
         } else {
             setPort(Integer.parseInt(System.getenv("PORT")));
