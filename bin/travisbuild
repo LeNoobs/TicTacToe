@@ -4,11 +4,8 @@ export PORT='1337'
 export TEST_URL='http://0.0.0.0:1337/'
 
 mvn -q clean
-
 mvn -q verify
+
 if [ $? -ne 0 ]; then
     exit 1
 fi
-
-mvn -q site
-echo "Reports available under target/site/project-reports.html"

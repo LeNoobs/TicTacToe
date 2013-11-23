@@ -1,11 +1,11 @@
 language: java
 jdk:
-- oraclejdk7
+  - oraclejdk7
 before_script:
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- sleep 3
-script: ./bin/testsuite
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3
+script: ./bin/travisbuild
 deploy:
   provider: heroku
   api_key:
@@ -14,4 +14,3 @@ deploy:
   on:
     branch: production
     repo: LeNoobs/TicTacToe
-
